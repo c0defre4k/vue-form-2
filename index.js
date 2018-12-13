@@ -2,12 +2,35 @@ import merge from 'merge'
 import formTemplate from './lib/templates/form.jsx'
 import opts from './lib/computed/opts'
 import statusBar from './lib/components/status-bar'
-import submit from './lib/components/submit'
+import Submit from './lib/components/submit'
+
+import labelClass from './lib/computed/label-class'
+import fieldClass from './lib/computed/field-class'
+import hasErrors from './lib/computed/has-errors'
+import submit from './lib/methods/submit'
+import formData from './lib/methods/form-data'
+import getField from './lib/methods/get-field'
+import showAllErrors from './lib/methods/show-all-errors'
+import reinitForm from './lib/methods/reinit-form'
+import registerInterfieldsRules from './lib/methods/register-interfields-rules'
+import registerTriggers from './lib/methods/register-triggers'
+import childrenOf from './lib/methods/children-of'
+import getStatusBar from './lib/methods/get-status-bar'
+import dispatch from './lib/methods/dispatch'
+
 import text from './lib/components/fields/text'
 import password from './lib/components/fields/password'
 import fields from './lib/templates/fields'
+import Email from './lib/components/fields/email'
+import Number from './lib/components/fields/number'
+import File from './lib/components/fields/file'
+import TextArea from './lib/components/fields/textarea'
+import Select from './lib/components/fields/select'
+import ButtonsList from './lib/components/fields/buttons-list'
+import Date from './lib/components/fields/date'
+import Checkbox from './lib/components/fields/checkbox'
 
-exports.install = function(Vue, globalOptions, customFields) {
+const install = function(Vue, globalOptions, customFields) {
 
   customFields = customFields?customFields:{};
 
@@ -89,9 +112,9 @@ exports.install = function(Vue, globalOptions, customFields) {
       }
     },
     computed: {
-      labelClass:require('./lib/computed/label-class'),
-      fieldClass:require('./lib/computed/field-class'),
-      hasErrors: require('./lib/computed/has-errors'),
+      labelClass,
+      fieldClass,
+      hasErrors,
       server: () => {
         return !this.ajax && !this.client;
       },
@@ -101,16 +124,16 @@ exports.install = function(Vue, globalOptions, customFields) {
       }
     },
     methods: {
-      submit:require('./lib/methods/submit'),
-      formData:require('./lib/methods/form-data'),
-      getField:require('./lib/methods/get-field'),
-      showAllErrors:require('./lib/methods/show-all-errors'),
-      reinitForm:require('./lib/methods/reinit-form'),
-      registerInterfieldsRules: require('./lib/methods/register-interfields-rules'),
-      registerTriggers: require('./lib/methods/register-triggers'),
-      childrenOf: require('./lib/methods/children-of'),
-      getStatusBar: require('./lib/methods/get-status-bar'),
-      dispatch: require('./lib/methods/dispatch'),
+      submit,
+      formData,
+      getField,
+      showAllErrors,
+      reinitForm,
+      registerInterfieldsRules,
+      registerTriggers,
+      childrenOf,
+      getStatusBar,
+      dispatch,
       getOptions: opts
     }
 
@@ -119,20 +142,22 @@ exports.install = function(Vue, globalOptions, customFields) {
   Vue.component('vf-form',vfForm);
 
   Vue.component('vf-text',text());
-  Vue.component('vf-email',require('./lib/components/fields/email')());
-  Vue.component('vf-number',require('./lib/components/fields/number')());
+  Vue.component('vf-email',Email());
+  Vue.component('vf-number', Number());
   Vue.component('vf-password',password());
-  Vue.component('vf-file',require('./lib/components/fields/file')());
-  Vue.component('vf-textarea',require('./lib/components/fields/textarea')());
-  Vue.component('vf-select',require('./lib/components/fields/select')());
-  Vue.component('vf-buttons-list',require('./lib/components/fields/buttons-list')());
-  Vue.component('vf-date',require('./lib/components/fields/date')());
-  Vue.component('vf-checkbox',require('./lib/components/fields/checkbox')());
+  Vue.component('vf-file',File());
+  Vue.component('vf-textarea',TextArea());
+  Vue.component('vf-select',Select());
+  Vue.component('vf-buttons-list', ButtonsList());
+  Vue.component('vf-date',Date());
+  Vue.component('vf-checkbox',Checkbox());
 
   Vue.component('vf-status-bar', statusBar);
-  Vue.component('vf-submit',submit);
+  Vue.component('vf-submit', Submit)
 
 
 }
 
-
+export default {
+  install
+}
