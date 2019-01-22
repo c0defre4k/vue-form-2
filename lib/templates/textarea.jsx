@@ -6,6 +6,7 @@ return <textarea
         on-change={this.updateValue.bind(this)}
         on-keyup={this.updateValue.bind(this)}
         disabled={this.disabled}
+        rows={this.rows}
         placeholder={this.placeholder}>
         	{this.curValue}
         </textarea>
