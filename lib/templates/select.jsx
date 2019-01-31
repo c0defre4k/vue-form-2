@@ -1,4 +1,4 @@
- export default function(h) {
+export default function(h) {
   let placeholder = '';
   let items = [];
 
@@ -13,7 +13,7 @@
 
 
     items = items.map((item) => {
-      return <option value={item.id} selected={item.id == this.curValue}>{item.text}</option>
+      return <option value={item.id} selected={this.multiple ? this.curValue.indexOf(String(item.id)) >= 0 : item.id == this.curValue}>{item.text}</option>
     })
   }
 
