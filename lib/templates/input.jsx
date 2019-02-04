@@ -7,6 +7,7 @@ export default function(h) {
         on-keyup={this.updateValue.bind(this)}
         class="form-control"
         placeholder={this.placeholder}
+        pattern={this.pattern}
         disabled={this.disabled}
         minlength={this.minlength}
         maxlength={this.maxlength}
