@@ -17,8 +17,7 @@ export default function(h) {
 }
 
 if (this.validationError) {
- error = <span class="VF-ValidationError
- help-block">{this.validationError}</span>
+ error = <span class="VF-ValidationError help-block">{this.validationError}</span>
 }
 
 if (this.hasFeedback) {
